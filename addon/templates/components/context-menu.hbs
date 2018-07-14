@@ -1,0 +1,20 @@
+{{#click-outside action=(action "hide")}}
+<div style="position:fixed;left: {{left}};top:{{top}};z-index:1000000" class="dropdown-toggle {{if isOpen 'open'}}">
+	<ul class="dropdown-menu" style="min-width: 0;">
+		{{#each menuActions as |item|}}
+		{{#if item.label}}
+		<li>
+			<a {{action 'perform' item}}>
+				{{#if item.icon}}
+					{{inline-svg item.icon class="icon icon-xs"}}&nbsp;&nbsp;
+				{{/if}}
+				{{translate item.label}}				
+			</a>
+		</li>
+		{{else}}
+			<li class="divider"></li>
+		{{/if}}
+		{{/each}}
+	</ul>
+</div>
+{{/click-outside}}
