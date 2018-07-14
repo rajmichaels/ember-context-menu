@@ -1,0 +1,1 @@
+export { default } from '@rajmichaels/ember-context-menu/services/context-menu';

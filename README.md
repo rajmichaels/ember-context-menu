@@ -1,7 +1,7 @@
 ember-context-menu
 ==============================================================================
 
-[Short description of the addon.]
+A Simple ember context menu component..
 
 Installation
 ------------------------------------------------------------------------------
@@ -22,7 +22,7 @@ Contributing
 
 ### Installation
 
-* `git clone <repository-url>`
+* `git clone https://github.com/rajmichaels/ember-context-menu.git`
 * `cd ember-context-menu`
 * `npm install`
 

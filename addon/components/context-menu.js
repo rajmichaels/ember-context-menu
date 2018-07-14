@@ -3,9 +3,12 @@ import { inject as service } from '@ember/service';
 import { oneWay } from '@ember/object/computed';
 import { on } from '@ember/object/evented';
 import { next } from '@ember/runloop';
+import layout from '../templates/components/context-menu';
 
 export default Component.extend({
   
+  layout,
+
   contextMenuService: service('context-menu'),
   router: service('-routing'),
 
