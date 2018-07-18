@@ -14,6 +14,8 @@ export default Component.extend({
 
   menuActions: oneWay('contextMenuService.menuActions'),
 
+  menuItemTemplate: null,
+
   init() {
     this._super(...arguments);
     this.get('contextMenuService').subscribe({

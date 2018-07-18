@@ -4,9 +4,13 @@
 		{{#each menuActions as |item|}}
 		{{#if item.label}}
 		<li>
+			{{#if menuItemTemplate}}
+				{{partial menuItemTemplate}}
+			{{else}}
 			<a {{action 'perform' item}} class="__ember__dropdown__item" href="#">
 				{{item.label}}				
 			</a>
+			{{/if}}
 		</li>
 		{{else}}
 			<li class="__ember__context__divider"></li>
