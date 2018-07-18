@@ -1,13 +1,11 @@
-{{#click-outside action=(action "hide")}}
-<div style="position:fixed;left: {{left}};top:{{top}};z-index:1000000">
-	<ul class="__ember__context__dropdown__menu {{if isOpen 'show'}}">
-		{{#each menuActions as |item|}}
+<ul class="__ember__context__dropdown__menu {{if isOpen 'show'}}">
+	{{#each menuActions as |item|}}
 		{{#if item.label}}
 		<li>
 			{{#if menuItemTemplate}}
 				{{partial menuItemTemplate}}
 			{{else}}
-			<a {{action 'perform' item}} class="__ember__dropdown__item" href="#">
+			<a {{action 'perform' item}} class="__ember__dropdown__item" tabindex="-1">
 				{{item.label}}				
 			</a>
 			{{/if}}
@@ -15,7 +13,5 @@
 		{{else}}
 			<li class="__ember__context__divider"></li>
 		{{/if}}
-		{{/each}}
-	</ul>
-</div>
-{{/click-outside}}
+	{{/each}}
+</ul>

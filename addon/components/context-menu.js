@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { computed } from '@ember/object';
 import { getOwner } from '@ember/application';
 import { inject as service } from '@ember/service';
 import { oneWay } from '@ember/object/computed';
@@ -8,6 +9,13 @@ import layout from '../templates/components/context-menu';
 export default Component.extend({
   
   layout,
+
+  attributeBindings: ['tabindex', 'style'],
+  tabindex: '-1',
+
+  style: computed('left', 'top', function() {
+    return `position:fixed;left: ${this.get('left')};top:${this.get('top')};z-index:1000000`;
+  }),
 
   contextMenuService: service('context-menu'),
   router: service('-routing'),
@@ -32,6 +40,15 @@ export default Component.extend({
       this.setPosition(left, top);
       if (!this.$('.dropdown-toggle').hasClass('open')) {
         this.set('isOpen', true);
+      }
+      this.$().focus();
+    });
+  },
+
+  focusOut() {
+    next(() => {
+      if (this.$().has(document.activeElement).length === 0) {
+        this.set('isOpen', false);
       }
     });
   },
