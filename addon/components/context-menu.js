@@ -1,7 +1,7 @@
 import Component from '@ember/component';
+import { getOwner } from '@ember/application';
 import { inject as service } from '@ember/service';
 import { oneWay } from '@ember/object/computed';
-import { on } from '@ember/object/evented';
 import { next } from '@ember/runloop';
 import layout from '../templates/components/context-menu';
 
@@ -14,13 +14,14 @@ export default Component.extend({
 
   menuActions: oneWay('contextMenuService.menuActions'),
 
-  subscribeRightClick: on('init', function() {
+  init() {
+    this._super(...arguments);
     this.get('contextMenuService').subscribe({
       eventName: 'handleRightClick',
       context: this,
       listener: this.handleRightClick
     });
-  }),
+  },
 
   handleRightClick(event) {
     next(() => {
@@ -34,7 +35,7 @@ export default Component.extend({
   },
 
   setPosition(left, top) {
-    let menuElement = this.$('.dropdown-menu');
+    let menuElement = this.$('.__ember__context__dropdown__menu');
     let menuHeight = menuElement.height();
     let menuWidth = menuElement.width();
     let windowHeight = document.documentElement.clientHeight;
@@ -51,13 +52,14 @@ export default Component.extend({
     });
   },
 
-  unsubscribeRightClick: on('willDestroyElement', function() {
+  willDestroyElement() {
     this.get('contextMenuService').unsubscribe({
       eventName: 'handleRightClick',
       context: this,
       listener: this.handleRightClick
     });
-  }),
+    this._super(...arguments);
+  },
 
   actions: {
     perform(item) {

@@ -1,1 +1,1 @@
-export { default } from '@rajmichaels/ember-context-menu/services/context-menu';
+export { default } from 'ember-context-menu/services/context-menu';

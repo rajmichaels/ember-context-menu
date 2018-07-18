@@ -1,0 +1,40 @@
+.__ember__context__dropdown__menu {
+    display: none;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+    color: #222222;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+}
+.__ember__context__dropdown__menu.show {
+  display: block;
+}
+.__ember__dropdown__item {
+  display: block;
+  width: 100%;
+  padding: .25rem 1.5rem;
+  clear: both;
+  color: #222222;
+  text-align: inherit;
+  background-color: transparent;
+  border: 0;
+  white-space: nowrap;
+  cursor: pointer;
+  font-weight: 400;
+}
+.__ember__dropdown__item:hover, .__ember__dropdown__item:focus {
+  text-decoration: none;
+  color: #fff;
+  background-color: #007bff;
+}
+.__ember__context__divider {
+  height: 1px;
+  margin: 2px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
