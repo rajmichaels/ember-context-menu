@@ -1,1 +1,0 @@
-export { default } from 'ember-context-menu/components/right-click';
