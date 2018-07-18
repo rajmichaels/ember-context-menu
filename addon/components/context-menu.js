@@ -10,11 +10,13 @@ export default Component.extend({
   
   layout,
 
+  classNames: ['__ember__context__menu'],
+
   attributeBindings: ['tabindex', 'style'],
   tabindex: '-1',
 
   style: computed('left', 'top', function() {
-    return `position:fixed;left: ${this.get('left')};top:${this.get('top')};z-index:1000000`;
+    return `left: ${this.get('left')};top:${this.get('top')};`;
   }),
 
   contextMenuService: service('context-menu'),
@@ -54,7 +56,7 @@ export default Component.extend({
   },
 
   setPosition(left, top) {
-    let menuElement = this.$('.__ember__context__dropdown__menu');
+    let menuElement = this.$('.__ember__context__menu__dropdown');
     let menuHeight = menuElement.height();
     let menuWidth = menuElement.width();
     let windowHeight = document.documentElement.clientHeight;

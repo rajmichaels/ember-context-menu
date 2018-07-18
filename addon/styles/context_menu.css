@@ -1,4 +1,9 @@
-.__ember__context__dropdown__menu {
+.__ember__context__menu {
+  position:fixed;
+  outline: 0;
+  z-index:1000000;
+}
+.__ember__context__menu__dropdown {
     display: none;
     padding: .5rem 0;
     margin: .125rem 0 0;
@@ -11,12 +16,11 @@
     border: 1px solid rgba(0,0,0,.15);
     border-radius: .25rem;
 }
-.__ember__context__dropdown__menu.show {
+.__ember__context__menu__dropdown.show {
   display: block;
 }
-.__ember__dropdown__item {
+.__ember__context__dropdown__item {
   display: block;
-  width: 100%;
   padding: .25rem 1.5rem;
   clear: both;
   color: #222222;
@@ -26,8 +30,9 @@
   white-space: nowrap;
   cursor: pointer;
   font-weight: 400;
+  text-decoration: none;
 }
-.__ember__dropdown__item:hover, .__ember__dropdown__item:focus {
+.__ember__context__dropdown__item:hover, .__ember__context__dropdown__item:focus {
   text-decoration: none;
   color: #fff;
   background-color: #007bff;

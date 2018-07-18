@@ -1,11 +1,11 @@
-<ul class="__ember__context__dropdown__menu {{if isOpen 'show'}}">
+<ul class="__ember__context__menu__dropdown {{if isOpen 'show'}}">
 	{{#each menuActions as |item|}}
 		{{#if item.label}}
 		<li>
 			{{#if menuItemTemplate}}
 				{{partial menuItemTemplate}}
 			{{else}}
-			<a {{action 'perform' item}} class="__ember__dropdown__item" tabindex="-1">
+			<a {{action 'perform' item}} class="__ember__context__dropdown__item" tabindex="-1">
 				{{item.label}}				
 			</a>
 			{{/if}}
