@@ -1,4 +1,4 @@
-ember-context-menu
+ember-simple-context-menu
 ==============================================================================
 
 A Simple ember context menu component..
@@ -7,7 +7,7 @@ Installation
 ------------------------------------------------------------------------------
 
 ```
-ember install ember-context-menu
+ember install ember-simple-context-menu
 ```
 
 
