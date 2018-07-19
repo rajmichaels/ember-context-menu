@@ -23,7 +23,7 @@ In your application.hbs
 {{context-menu}}
 ```
 
-Right Click Trigger
+### Right Click Trigger
 
 In your list or any template
 
@@ -50,6 +50,52 @@ In your list or any template
     </tbody>
   </table>
 </div>
+```
+
+### Menu Actions
+In your Controller
+
+```javascript
+import Controller from '@ember/controller';
+
+export default Controller.extend({
+  menuActions: [
+    { label: 'Edit', action: 'edit' },
+    { label: 'Email', action: 'email' },
+    { label: 'Print', action: 'print' },
+    { label: 'Download', action: 'download' },
+    {},
+    { label: 'Delete', action: 'delete' }
+  ]
+});
+```
+
+### Actions Handling
+
+In your current route
+
+```javascript
+import Route from '@ember/routing/route';
+
+export default Route.extend({
+  actions: {
+    edit(model) {
+      console.log("Edit " + model.name);
+    },
+    email(model) {
+      console.log("Email " + model.name);
+    },
+    print(model) {
+      console.log("Print " + model.name);
+    },
+    download(model) {
+      console.log("Download " + model.name);
+    },
+    delete(model) {
+      console.log("Delete " + model.name);
+    }
+  }
+});
 ```
 
 
