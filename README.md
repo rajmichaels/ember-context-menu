@@ -3,6 +3,8 @@ ember-simple-context-menu
 
 A Simple ember context menu component..
 
+[DEMO](https://rajmichaels.netlify.com/)
+
 Installation
 ------------------------------------------------------------------------------
 
@@ -14,7 +16,41 @@ ember install ember-simple-context-menu
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+
+In your application.hbs
+
+```handlebars
+{{context-menu}}
+```
+
+Right Click Trigger
+
+In your list or any template
+
+```handlebars
+<div class="container">
+  <table class="table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th>Name</th>
+        <th>City</th>
+        <th>Education</th>
+        <th>Work City</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model as |contact|}}
+        {{#right-click menuActions=menuActions model=contact tagName="tr"}}
+          <td>{{contact.name}}</td>
+          <td>{{contact.city}}</td>
+          <td>{{contact.education}}</td>
+          <td>{{contact.work}}</td>
+        {{/right-click}}
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+```
 
 
 Contributing
