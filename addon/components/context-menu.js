@@ -5,10 +5,20 @@ import { inject as service } from '@ember/service';
 import { oneWay } from '@ember/object/computed';
 import { next } from '@ember/runloop';
 import layout from '../templates/components/context-menu';
+import { isPresent } from '@ember/utils';
+
+const KEY = {
+  DOWN_ARROW: 40,
+  UP_ARROW: 38,
+  ESC_KEY: 27,
+  ENTER_KEY: 13
+};
 
 export default Component.extend({
   
   layout,
+
+  elementId: '__ember__context__menu',
 
   classNames: ['__ember__context__menu'],
 
@@ -40,17 +50,56 @@ export default Component.extend({
       let left = event.clientX;
       let top = event.clientY;
       this.setPosition(left, top);
-      if (!this.$('.dropdown-toggle').hasClass('open')) {
-        this.set('isOpen', true);
-      }
+      this.set('isOpen', true);
       this.$().focus();
     });
+  },
+
+  keyUp(event) {
+    let { keyCode } = event;
+    if (keyCode === KEY.DOWN_ARROW) {
+      this.gotoNext();
+    } else if (keyCode === KEY.UP_ARROW) {
+      this.gotoPrevious();
+    } else if ((keyCode === KEY.ENTER_KEY) || (keyCode === KEY.ESC_KEY)) {
+      this.hide();
+    }
+  },
+
+  gotoPrevious() {
+    if (document.activeElement.id === '__ember__context__menu') {
+      this.$('ul li').last().find('a').focus();
+      return;
+    }
+    let focusedLiElement = this.$(document.activeElement).parent();
+    if (focusedLiElement) {
+      if (focusedLiElement.prev().hasClass('__ember__context__divider')) {
+        this.$(focusedLiElement).prev().prev().find('a').focus();
+        return;
+      }
+      this.$(focusedLiElement).prev().find('a').focus();
+    }
+  },
+
+  gotoNext() {
+    if (document.activeElement.id === '__ember__context__menu') {
+      this.$('ul li').first().find('a').focus();
+      return;
+    }
+    let focusedLiElement = this.$(document.activeElement).parent();
+    if (focusedLiElement) {
+      if (focusedLiElement.next().hasClass('__ember__context__divider')) {
+        this.$(focusedLiElement).next().next().find('a').focus();
+        return;
+      }
+      this.$(focusedLiElement).next().find('a').focus();
+    }
   },
 
   focusOut() {
     next(() => {
       if (this.$().has(document.activeElement).length === 0) {
-        this.set('isOpen', false);
+        this.hide();
       }
     });
   },
@@ -73,6 +122,10 @@ export default Component.extend({
     });
   },
 
+  hide() {
+    this.set('isOpen', false);
+  },
+
   willDestroyElement() {
     this.get('contextMenuService').unsubscribe({
       eventName: 'handleRightClick',
@@ -84,12 +137,18 @@ export default Component.extend({
 
   actions: {
     perform(item) {
-      let currentRoute = getOwner(this).lookup(`route:${this.get('router.router.currentRouteName')}`);
-      currentRoute.send(item.action, this.get('contextMenuService.model'));
-      this.set('isOpen', false);
+      let { menuActionContext, model } = this.get('contextMenuService');
+
+      if (isPresent(menuActionContext)) {
+        menuActionContext.send(item.action, model);
+      } else {
+        let currentRoute = getOwner(this).lookup(`route:${this.get('router.router.currentRouteName')}`);
+        currentRoute.send(item.action, model);
+      }
+      this.hide();
     },
     hide() {
-      this.set('isOpen', false);
+      this.hide();
     }
   }
 

@@ -6,10 +6,11 @@ export default Service.extend(Evented, {
   menuActions: null,
   model: null,
 
-  show(event, menuActions, model) {
+  show(event, menuActions, model, menuActionContext) {
     this.setProperties({
       menuActions,
-      model
+      model,
+      menuActionContext
     });
     this.trigger('handleRightClick', event);
   },
